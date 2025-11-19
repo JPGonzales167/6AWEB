@@ -1,0 +1,73 @@
+/* Tools & Proficiencies Section */
+.technical-skills {
+  margin-bottom: 40px;
+  padding: 25px 30px;
+  border-radius: 10px;
+  border-left: 5px solid #a78a64;
+  transition: box-shadow 0.3s ease;
+}
+
+.technical-skills:hover {
+  box-shadow: 0 6px 15px rgba(58, 47, 38, 0.08);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #3a2f26;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  border-left: 5px solid #7c6a53;
+  padding-left: 12px;
+  letter-spacing: 1px;
+}
+
+.tech-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tech-category {
+  padding: 15px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #a78a64;
+  transition: background 0.3s ease;
+}
+
+.tech-category:hover {
+  background-color: #ede7de;
+}
+
+.category-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #3a2f26;
+  margin-bottom: 8px;
+}
+
+.tech-items {
+  font-size: 0.95rem;
+  color: #5a4b3a;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.2rem;
+  }
+  .tech-items {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.1rem;
+  }
+  .tech-items {
+    font-size: 0.85rem;
+  }
+}

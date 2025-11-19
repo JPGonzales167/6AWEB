@@ -1,0 +1,104 @@
+.cv-header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  padding-bottom: 20px;
+  background: #fffdf8;
+  border-radius: 12px;
+  padding: 40px 30px;
+  box-shadow: 0 6px 18px rgba(72, 56, 37, 0.08);
+}
+
+.cv-header::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #7c6a53, #a78a64);
+}
+
+.name {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  color: #3a2f26;
+}
+
+.tagline {
+  font-size: 1.05rem;
+  color: #6a5e4c;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.contact-info {
+  font-size: 0.95rem;
+  color: #5c4f3b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contact-item a {
+  color: #927b57;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: #5e4a32;
+  text-decoration: underline;
+}
+
+.separator {
+  color: #b8ab9b;
+  margin: 0 5px;
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #a78a64, transparent);
+  margin-top: 25px;
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .name {
+    font-size: 2.2rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .contact-info {
+    font-size: 0.9rem;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 1.8rem;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+  }
+
+  .contact-info {
+    font-size: 0.85rem;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
