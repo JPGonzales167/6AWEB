@@ -1,0 +1,63 @@
+/* General table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+td, th {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background: #333;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Buttons */
+button {
+  padding: 8px 14px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* Inputs */
+input[type="text"] {
+  padding: 8px;
+  width: 150px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+/* List styling */
+ul {
+  margin: 0;
+  padding: 0 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+/* Paragraphs inside conditions */
+p {
+  margin: 0;
+  font-size: 15px;
+}
