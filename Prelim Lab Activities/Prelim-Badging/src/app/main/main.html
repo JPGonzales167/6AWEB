@@ -1,0 +1,65 @@
+<!-- Hero Section -->
+<header class="hero">
+  <div class="hero-inner">
+    <h1>Research Conferences</h1>
+    <p class="lead">Join our online events this 2026!</p>
+    <button class="cta">Early-Bird Registration</button>
+  </div>
+</header>
+
+<!-- Intro Section -->
+<section id="intro" class="intro">
+  <h2>Join our Research Conferences around the Globe!</h2>
+  <div class="cards">
+    <article class="card" *ngFor="let city of cities">
+      <img [src]="city.img" [alt]="city.name" />
+      <h3>{{ city.name }}</h3>
+      <p class="meta">{{ city.category }}</p>
+      <p class="desc">{{ city.description }}</p>
+    </article>
+  </div>
+</section>
+
+<!-- Highlights Section -->
+<section id="highlights" class="highlights">
+  <h2>Why Attend?</h2>
+  <div class="highlight-grid">
+    <div class="highlight">
+      <h3>Global Networking</h3>
+      <p>Connect with researchers, academicians, and innovators from over 50 countries.</p>
+    </div>
+    <div class="highlight">
+      <h3>Cutting-Edge Topics</h3>
+      <p>Stay ahead with sessions on AI, sustainability, healthcare, and emerging technologies.</p>
+    </div>
+    <div class="highlight">
+      <h3>Interactive Workshops</h3>
+      <p>Engage in hands-on learning experiences led by industry experts and thought leaders.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials">
+  <h2>What People Are Saying</h2>
+  <div class="testimonial-grid">
+    <blockquote>
+      <p>"An inspiring event that broadened my horizons and connected me with brilliant minds."</p>
+      <footer>— Dr. Jane Smith, University of Oxford</footer>
+    </blockquote>
+    <blockquote>
+      <p>"The workshops were practical and engaging. I left with new skills and collaborations."</p>
+      <footer>— Prof. John Doe, MIT</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- Subscription Section -->
+<section id="join" class="binding">
+  <h3>Subscribe</h3>
+  <label>
+    Enter your name:
+    <input [(ngModel)]="subscriber.name" placeholder="Full name" />
+  </label>
+  <p>Hello, <strong>{{ subscriber.name || 'friend' }}</strong> — thanks for visiting!</p>
+</section>

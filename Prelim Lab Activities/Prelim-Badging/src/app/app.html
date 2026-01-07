@@ -1,0 +1,23 @@
+<nav class="topbar">
+  <div class="container">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/partners" routerLinkActive="active">Our Partners</a>
+    <a routerLink="/about" routerLinkActive="active">About the Organization</a>
+    <a routerLink="/join" routerLinkActive="active">Join Us!</a>
+  </div>
+</nav>
+
+<main class="page container">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="brand">Research Conferences</div>
+    <div class="meta">© 2026 Research Conferences — All rights reserved.</div>
+    <nav class="links" aria-label="Footer links">
+      <a href="#" aria-label="Privacy">Privacy</a>
+      <a href="#" aria-label="Terms">Terms</a>
+    </nav>
+  </div>
+</footer>

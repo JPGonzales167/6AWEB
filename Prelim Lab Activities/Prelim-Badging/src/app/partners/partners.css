@@ -1,0 +1,153 @@
+:host {
+  display: block;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.partners-hero {
+  background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.35)),
+    url('https://picsum.photos/id/1005/1400/220');
+  background-size: cover;
+  background-position: center;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1.5rem; /* add spacing below hero to separate visually */
+}
+
+.hero-inner h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-inner p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.cta {
+  background: #0077ff;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.cta:hover {
+  background: #005fcc;
+}
+
+/* Partners List */
+.partners-list {
+  padding: 3.5rem 1.5rem; /* more vertical space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.partners-list h3 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+  color: #0077ff;
+}
+
+/* Table Styling */
+.table-wrapper {
+  overflow-x: auto;
+  display: flex;
+  justify-content: center; /* center table horizontally */
+  padding: 1rem; /* add breathing room on sides */
+}
+
+table {
+  width: 100%;
+  max-width: 900px; /* slightly wider but still constrained */
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+thead th {
+  text-align: left;
+  padding: 1rem 1.25rem; /* larger header padding */
+  background: #f4f6f8;
+  font-weight: 600;
+  color: #333;
+}
+
+tbody td {
+  padding: 1.125rem 1.25rem; /* more vertical and horizontal padding */
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+tbody tr {
+  height: auto;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+tbody img {
+  width: 48px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Sponsorship Badge */
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  background: #e6f0ff;
+  color: #0077ff;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Link Button */
+.link-btn {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: #0077ff;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+.link-btn:hover {
+  background: #005fcc;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-inner h2 {
+    font-size: 1.6rem;
+  }
+  .hero-inner p {
+    font-size: 1rem;
+  }
+  table {
+    font-size: 0.9rem;
+  }
+}
+/* Layout Container */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

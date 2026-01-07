@@ -1,0 +1,31 @@
+<header class="partners-hero">
+  <div class="container hero-inner">
+    <h2>Our Partners</h2>
+    <p>You can achieve a very impressive effect by using our animated navbar.</p>
+    <button class="cta">Become a Sponsor</button>
+  </div>
+</header>
+
+<section class="partners-list container">
+  <h3>Below are our Corporate Partners</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Trademark</th>
+          <th>Sponsorship</th>
+          <th>Go to Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of partners">
+          <td>{{ p.name }}</td>
+          <td><img [src]="p.logo" alt="{{p.name}} logo" /></td>
+          <td><span class="badge">{{ p.level }}</span></td>
+          <td><a [href]="p.website" target="_blank" class="link-btn">View website</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

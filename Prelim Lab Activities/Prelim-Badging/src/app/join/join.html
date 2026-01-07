@@ -1,0 +1,43 @@
+<header class="join-hero">
+  <div class="container hero-inner">
+    <h2>Join Our Mailing List!</h2>
+    <p>Join and meet thousands of academicians around the globe and stay updated.</p>
+  </div>
+</header>
+
+<section class="join-form container">
+  <h3>Fill the form below:</h3>
+  <form (ngSubmit)="onSubmit()" class="form-grid">
+    <div class="form-row">
+      <label>
+        Firstname:
+        <input [(ngModel)]="model.firstname" name="firstname" />
+      </label>
+      <label>
+        Lastname:
+        <input [(ngModel)]="model.lastname" name="lastname" />
+      </label>
+    </div>
+    <div class="form-row">
+      <label>
+        Fullname:
+        <input [value]="model.firstname + ' ' + model.lastname" readonly />
+      </label>
+    </div>
+    <div class="form-row">
+      <label>
+        Enter Email Address:
+        <input [(ngModel)]="model.email" name="email" type="email" />
+      </label>
+    </div>
+    <div class="form-row">
+      <label>
+        Enter Institution/Affiliation:
+        <input [(ngModel)]="model.institution" name="institution" />
+      </label>
+    </div>
+    <div class="form-row">
+      <button type="submit" class="cta">Submit</button>
+    </div>
+  </form>
+</section>
