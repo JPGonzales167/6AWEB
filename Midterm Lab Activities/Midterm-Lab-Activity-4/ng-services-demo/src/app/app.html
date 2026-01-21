@@ -1,0 +1,17 @@
+<h2>PRODUCT LIST</h2>
+<table>
+  <tr>
+    <th>Product ID</th>
+    <th>Product Name</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
+  @for (employee of employees; track employee.productid) {
+    <tr class="border-b">
+      <td class="py-2 px-4 text-center">{{ employee.productid }}</td>
+      <td class="py-2 px-4 text-center">{{ employee.productname }}</td>
+      <td class="py-2 px-4 text-center">{{ employee.description }}</td>
+      <td class="py-2 px-4 text-center">{{ employee.price }}</td>
+    </tr>
+  }
+</table>
