@@ -1,0 +1,31 @@
+<div class="home-container">
+  <!-- Welcome Section -->
+  <div class="welcome-section">
+    <h2>Welcome to the Portal</h2>
+    <p class="welcome-text">
+      Explore the latest updates below or navigate to other sections using the menu above.
+    </p>
+    <p class="portal-date">
+      <strong>Portal Date:</strong> {{ '2026-04-07' | date:'fullDate' }}
+    </p>
+  </div>
+
+  <!-- Latest Updates Section -->
+  <div class="latest-updates">
+    <h3>📰 Latest Updates</h3>
+    <p class="section-subtitle">Showing the 5 most recent posts</p>    <div class="posts-list">
+      <div class="post-card" *ngFor="let post of posts$ | async">
+        <div class="post-header">
+          <h4>{{ post.title | uppercase }}</h4>
+          <span class="post-user">User {{ post.userId }}</span>
+        </div>
+        <p class="post-preview">{{ post.body | slice:0:120 }}...</p>
+        <div class="post-footer">
+          <span class="post-id">ID: {{ post.id }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

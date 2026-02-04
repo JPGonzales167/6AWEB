@@ -1,0 +1,47 @@
+<div class="services-section">
+  <h2>Services - All Posts</h2>
+  <p class="section-description">Browse and search through all available posts</p>
+  <!-- Search Box -->
+  <div class="search-container">
+    <label for="searchInput" class="search-label">Search Posts:</label>
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search by title or body..."
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+      class="search-input"
+    />
+    <small class="search-hint" *ngIf="searchTerm">
+      Searching for: "{{ searchTerm }}"
+    </small>  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading posts...</p>
+  </div>
+  <!-- Posts List -->
+  <div *ngIf="!isLoading" class="posts-container">
+    <div class="posts-count">
+      <p>Found {{ filteredPosts.length }} posts</p>
+    </div>    <div class="posts-grid">
+      <div class="post-item" *ngFor="let post of filteredPosts">
+        <div class="post-id-badge">ID: {{ post.id }}</div>
+        <h4 class="post-title">{{ post.title }}</h4>
+        <p class="post-body-preview">{{ post.body | slice:0:150 }}...</p>
+        <div class="post-meta">
+          <span class="post-user">User ID: {{ post.userId }}</span>
+          <span class="post-length">{{ post.body.length }} chars</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div *ngIf="filteredPosts.length === 0" class="no-results">
+      <p>No posts found matching your search criteria.</p>
+    </div>
+  </div>
+</div>
+
+
