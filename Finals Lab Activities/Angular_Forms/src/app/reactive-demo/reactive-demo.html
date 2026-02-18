@@ -1,0 +1,122 @@
+<div class="card">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <input
+      class="input"
+      placeholder="Username"
+      formControlName="username"
+    />
+    @if (isInvalid('username')) {
+      <small class="error">
+        Username: 4–12 chars (letters/numbers/_)
+      </small>
+    }
+
+    <input
+      class="input"
+      type="email"
+      placeholder="Email"
+      formControlName="email"
+    />
+    @if (isInvalid('email')) {
+      <small class="error">
+        Enter a valid email
+      </small>
+    }
+
+    <input
+      class="input"
+      type="password"
+      placeholder="Password"
+      formControlName="password"
+    />
+    @if (isInvalid('password')) {
+      <small class="error">
+        Password: 8+ with upper, lower, number
+      </small>
+    }    <select
+      class="input"
+      formControlName="role"
+    >
+      @for (r of roles; track r) {
+        <option [value]="r">{{ r }}</option>
+      }
+    </select>
+
+    <div class="field-group">
+      <label class="field-label">Gender</label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input
+            type="radio"
+            formControlName="gender"
+            value="male">
+          <span>Male</span>
+        </label>
+        <label class="radio-label">
+          <input
+            type="radio"
+            formControlName="gender"
+            value="female">
+          <span>Female</span>
+        </label>
+        <label class="radio-label">
+          <input
+            type="radio"
+            formControlName="gender"
+            value="other">
+          <span>Other</span>
+        </label>
+      </div>
+      @if (isInvalid('gender')) {
+        <small class="error">
+          Please select a gender
+        </small>
+      }
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Status</label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input
+            type="radio"
+            formControlName="status"
+            value="permanent">
+          <span>Permanent</span>
+        </label>
+        <label class="radio-label">
+          <input
+            type="radio"
+            formControlName="status"
+            value="probationary">
+          <span>Probationary</span>
+        </label>
+      </div>
+      @if (isInvalid('status')) {
+        <small class="error">
+          Please select a status
+        </small>
+      }
+    </div>
+
+    <textarea
+      class="input textarea"
+      formControlName="comments"
+      placeholder="Enter your comments or notes"
+      rows="4"></textarea>
+    @if (isInvalid('comments')) {
+      <small class="error">
+        Please enter your comments
+      </small>
+    }
+
+    <button
+      class="btn"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>

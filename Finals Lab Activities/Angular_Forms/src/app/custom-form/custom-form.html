@@ -1,0 +1,172 @@
+<div class="astral-terminal">
+  <!-- Header -->
+  <div class="terminal-header">
+    <div class="header-glow"></div>
+    <div class="logo">⭐ ASTRAL EXPRESS</div>
+    <h1 class="terminal-title">TRAILBLAZER REGISTRATION</h1>
+    <p class="terminal-subtitle">// SYSTEM ID: AE-2026 | ACCESS LEVEL: RECRUIT</p>
+  </div>
+
+  <form [formGroup]="trailblazerForm" (ngSubmit)="onSubmit()" class="trailblazer-form">
+
+    <!-- Section 1: Trailblazer Profile -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-icon">🌟</span>
+        <h2 class="section-title">TRAILBLAZER PROFILE</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="input-group">
+        <label class="neon-label">TRAILBLAZER NAME *</label>
+        <input
+          type="text"
+          class="neon-input"
+          formControlName="trailblazerName"
+          placeholder="Enter your codename..."
+          [class.error]="isInvalid('trailblazerName')">
+        @if (isInvalid('trailblazerName')) {
+          <span class="error-msg">⚠ {{ getErrorMessage('trailblazerName') }}</span>
+        }
+      </div>
+
+      <div class="grid-2">
+        <div class="input-group">
+          <label class="neon-label">PATH AFFINITY *</label>
+          <select
+            class="neon-select"
+            formControlName="pathAffinity"
+            [class.error]="isInvalid('pathAffinity')">
+            <option value="" disabled selected>Select Path...</option>
+            @for (path of paths; track path) {
+              <option [value]="path">{{ path }}</option>
+            }
+          </select>
+          @if (isInvalid('pathAffinity')) {
+            <span class="error-msg">⚠ {{ getErrorMessage('pathAffinity') }}</span>
+          }
+        </div>
+
+        <div class="input-group">
+          <label class="neon-label">ELEMENT ALIGNMENT *</label>
+          <select
+            class="neon-select"
+            formControlName="elementAlignment"
+            [class.error]="isInvalid('elementAlignment')">
+            <option value="" disabled selected>Select Element...</option>
+            @for (element of elements; track element) {
+              <option [value]="element">{{ element }}</option>
+            }
+          </select>
+          @if (isInvalid('elementAlignment')) {
+            <span class="error-msg">⚠ {{ getErrorMessage('elementAlignment') }}</span>
+          }
+        </div>
+      </div>      <div class="grid-2">
+        <div class="input-group">
+          <label class="neon-label">SERVER REGION *</label>
+          <select
+            class="neon-select"
+            formControlName="serverRegion"
+            [class.error]="isInvalid('serverRegion')">
+            <option value="" disabled selected>Select Server...</option>
+            @for (server of servers; track server) {
+              <option [value]="server">{{ server }}</option>
+            }
+          </select>
+          @if (isInvalid('serverRegion')) {
+            <span class="error-msg">⚠ {{ getErrorMessage('serverRegion') }}</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Combat & Feedback -->
+    <div class="form-section">
+      <div class="section-header">
+        <span class="section-icon">⚔️</span>
+        <h2 class="section-title">COMBAT & FEEDBACK</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="input-group">
+        <label class="neon-label">FAVORITE CHARACTER *</label>
+        <select
+          class="neon-select"
+          formControlName="favoriteCharacter"
+          [class.error]="isInvalid('favoriteCharacter')">
+          <option value="" disabled selected>Select Character...</option>
+          @for (char of characters; track char) {
+            <option [value]="char">{{ char }}</option>
+          }
+        </select>
+        @if (isInvalid('favoriteCharacter')) {
+          <span class="error-msg">⚠ {{ getErrorMessage('favoriteCharacter') }}</span>
+        }
+      </div>      <div class="input-group">
+        <label class="neon-label">PREFERRED TEAM ROLE *</label>
+        <div class="checkbox-grid">
+          <label class="cyber-checkbox">
+            <input type="radio" formControlName="teamRole" value="DPS">
+            <span class="checkbox-box"></span>
+            <span>DPS</span>
+          </label>
+          <label class="cyber-checkbox">
+            <input type="radio" formControlName="teamRole" value="Support">
+            <span class="checkbox-box"></span>
+            <span>Support</span>
+          </label>
+          <label class="cyber-checkbox">
+            <input type="radio" formControlName="teamRole" value="Tank">
+            <span class="checkbox-box"></span>
+            <span>Tank</span>
+          </label>
+          <label class="cyber-checkbox">
+            <input type="radio" formControlName="teamRole" value="Hybrid">
+            <span class="checkbox-box"></span>
+            <span>Hybrid</span>
+          </label>
+        </div>
+        @if (isInvalid('teamRole')) {
+          <span class="error-msg">⚠ {{ getErrorMessage('teamRole') }}</span>
+        }
+      </div>
+
+      <div class="input-group">
+        <label class="neon-label">SHARE YOUR EXPERIENCE * (10-200 characters)</label>
+        <textarea
+          class="neon-textarea"
+          formControlName="feedback"
+          placeholder="Tell us about your journey as a Trailblazer..."
+          rows="3"
+          [class.error]="isInvalid('feedback')"></textarea>
+        <div class="char-count">{{ trailblazerForm.get('feedback')?.value?.length || 0 }} / 200</div>
+        @if (isInvalid('feedback')) {
+          <span class="error-msg">⚠ {{ getErrorMessage('feedback') }}</span>
+        }
+      </div>
+
+      <div class="input-group">
+        <label class="cyber-checkbox community-check">
+          <input type="checkbox" formControlName="joinCommunity">
+          <span class="checkbox-box"></span>
+          <span>JOIN THE TRAILBLAZER COMMUNITY</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="terminal-actions">
+      <button type="button" class="btn-reset" (click)="resetForm()">
+        <span>↻ RESET</span>
+      </button>      <button type="submit" class="btn-submit" [disabled]="trailblazerForm.invalid">
+        <span>✨ BOARD THE EXPRESS</span>
+        <div class="btn-glow"></div>
+      </button>
+    </div>
+
+    <div class="terminal-footer">
+      <p>// END OF TRANSMISSION</p>
+    </div>
+  </form>
+</div>
