@@ -1,0 +1,305 @@
+<!-- ═══════════════════ PARTICLE BACKGROUND ═══════════════════ -->
+<div class="bg-scene" aria-hidden="true">
+  @for (p of petalIndices; track p) {
+  <div class="sakura-petal" [style.animation-delay]="(p * 0.7) + 's'" [style.left]="(p * 8 - 4) + '%'"></div>
+}
+  <div class="grid-overlay"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<header class="navbar">
+  <div class="navbar-inner">
+    <div class="nav-brand">
+      <span class="nav-logo">⚡</span>
+      <span class="nav-title">AniVault</span>
+      <span class="nav-tag">Collection Manager</span>
+    </div>
+    <div class="nav-stats">
+      <div class="stat-badge">
+        <span class="stat-num">{{ animes.length }}</span>
+        <span class="stat-lbl">Titles</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">✦ Your Personal Anime Universe ✦</div>
+    <h1 class="hero-title">
+      <span class="title-line-1">ANIME</span>
+      <span class="title-line-2">VAULT</span>
+    </h1>
+    <p class="hero-sub">Track, manage, and explore your anime collection. Add new titles, organize by genre, and never lose track of a series.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" (click)="toggleAddForm()">
+        <span class="btn-icon">{{ showAddForm ? '✕' : '＋' }}</span>
+        {{ showAddForm ? 'Cancel' : 'Add New Anime' }}
+      </button>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" [(ngModel)]="searchQuery" placeholder="Search titles, genres…" />
+      </div>
+    </div>
+  </div>
+  <div class="hero-deco" aria-hidden="true">
+    <div class="deco-ring ring-1"></div>
+    <div class="deco-ring ring-2"></div>
+    <div class="deco-ring ring-3"></div>
+    <div class="deco-kanji">アニメ</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SUCCESS TOAST ═══════════════════ -->
+@if (addSuccess) {
+  <div class="toast toast-success">
+    <span class="toast-icon">🎉</span>
+    <span>Anime added to your vault!</span>
+  </div>
+}
+
+@if (rateSuccess) {
+  <div class="toast toast-rate">
+    <span class="toast-icon">⭐</span>
+    <span>Rating saved!</span>
+  </div>
+}
+
+<!-- ═══════════════════ ADD FORM PANEL ═══════════════════ -->
+@if (showAddForm) {
+  <section class="add-panel">
+    <div class="panel-inner">
+      <div class="panel-header">
+        <h2 class="panel-title"><span class="accent-bar"></span> New Anime Entry</h2>
+        <p class="panel-sub">Fill in the details to add a title to your vault</p>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Anime Title <span class="required">*</span></label>
+          <input class="form-input" [(ngModel)]="newTitle" [class.input-error]="addError && !newTitle.trim()" placeholder="e.g. Demon Slayer" />
+          @if (addError && !newTitle.trim()) {
+            <span class="error-msg">Title is required</span>
+          }
+        </div>
+        <div class="form-group">
+          <label class="form-label">Genre / Description</label>
+          <input class="form-input" [(ngModel)]="newGenre" placeholder="e.g. Action, Fantasy, Shounen…" />
+        </div>        <div class="form-group">
+          <label class="form-label">Episodes</label>
+          <input class="form-input" [(ngModel)]="newEpisodes" type="number" placeholder="e.g. 26" min="1" />
+        </div>
+        <div class="form-group form-group-full">
+          <label class="form-label">Your Rating</label>
+          <div class="star-picker">
+            @for (s of starIndices; track s) {
+              <button type="button"
+                [class]="getStarClass(s, newRating, newHoverRating)"
+                (mouseenter)="newHoverRating = s"
+                (mouseleave)="newHoverRating = 0"
+                (click)="newRating = (newRating === s ? 0 : s)"
+                [attr.aria-label]="'Rate ' + s + ' stars'">★</button>
+            }
+            <span class="star-label">{{ getRatingLabel(newHoverRating || newRating) }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button class="btn-ghost" (click)="toggleAddForm()">Cancel</button>
+        <button class="btn-primary" (click)="addAnime()">
+          <span>⚡</span> Add to Vault
+        </button>
+      </div>
+    </div>
+  </section>
+}
+
+<!-- ═══════════════════ COLLECTION GRID ═══════════════════ -->
+<main class="collection-section">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="accent-bar"></span>
+      My Collection
+      @if (searchQuery) {
+        <span class="filter-tag">« {{ searchQuery }} »</span>
+      }
+    </h2>
+    <span class="count-badge">{{ filteredAnimes.length }} {{ filteredAnimes.length === 1 ? 'title' : 'titles' }}</span>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading your collection…</p>
+    </div>
+  }
+
+  @if (!isLoading && filteredAnimes.length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">( ╥ω╥ )</div>
+      <h3 class="empty-title">{{ searchQuery ? 'No results found' : 'Your vault is empty' }}</h3>
+      <p class="empty-sub">{{ searchQuery ? 'Try a different search term.' : 'Start by adding your first anime title above!' }}</p>
+      @if (!searchQuery) {
+        <button class="btn-primary" (click)="toggleAddForm()">＋ Add First Anime</button>
+      }
+    </div>
+  }
+
+  <div class="anime-grid">
+    @for (anime of filteredAnimes; track anime.id) {
+      <article class="anime-card" [attr.data-id]="anime.id">
+        <div class="card-glow"></div>
+        <div class="card-header">
+          <div class="card-rank">#{{ $index + 1 }}</div>
+          <div class="card-badge">
+            @if (anime.price && +anime.price > 0) {
+              <span class="ep-badge">{{ anime.price }} eps</span>
+            }
+          </div>
+        </div>        <div class="card-body">
+          <h3 class="card-title">{{ anime.title }}</h3>
+          <p class="card-genre">{{ anime.desc || 'No genre listed' }}</p>
+          <div class="card-rating">
+            @for (s of starIndices; track s) {
+              <span [class]="s <= (anime.rating || 0) ? 'card-star filled' : 'card-star empty'">★</span>
+            }
+            @if (anime.rating > 0) {
+              <span class="rating-num">{{ anime.rating }}/5</span>
+            } @else {
+              <span class="rating-unset">Not rated</span>
+            }
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn-rate" (click)="openRateModal(anime)">
+            <span>⭐</span> Rate
+          </button>
+          <button class="btn-edit" (click)="openEditModal(anime)">
+            <span>✏️</span> Edit
+          </button>
+          <button class="btn-delete" (click)="confirmDelete(anime.id, anime.title)">
+            <span>🗑</span>
+          </button>
+        </div>
+      </article>
+    }
+  </div>
+</main>
+
+<!-- ═══════════════════ EDIT MODAL ═══════════════════ -->
+@if (showEditModal) {
+  <div class="modal-backdrop" (click)="closeEditModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title"><span class="accent-bar"></span> Edit Anime</h2>
+        <button class="modal-close" (click)="closeEditModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Title</label>
+          <input class="form-input" [(ngModel)]="editAnime.title" placeholder="Anime title" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Genre / Description</label>
+          <input class="form-input" [(ngModel)]="editAnime.desc" placeholder="Genre or description" />
+        </div>        <div class="form-group">
+          <label class="form-label">Episodes</label>
+          <input class="form-input" [(ngModel)]="editAnime.price" type="number" placeholder="Number of episodes" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Rating</label>
+          <div class="star-picker">
+            @for (s of starIndices; track s) {
+              <button type="button"
+                [class]="getStarClass(s, editAnime.rating, editHoverRating)"
+                (mouseenter)="editHoverRating = s"
+                (mouseleave)="editHoverRating = 0"
+                (click)="editAnime.rating = (editAnime.rating === s ? 0 : s)"
+                [attr.aria-label]="'Rate ' + s + ' stars'">★</button>
+            }
+            <span class="star-label">{{ getRatingLabel(editHoverRating || editAnime.rating) }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" (click)="closeEditModal()">Cancel</button>
+        <button class="btn-primary" (click)="saveAnime()"><span>💾</span> Save Changes</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ═══════════════════ DELETE CONFIRM MODAL ═══════════════════ -->
+@if (showDeleteModal) {
+  <div class="modal-backdrop" (click)="cancelDelete()">
+    <div class="modal modal-danger" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title danger-title">⚠ Remove Anime</h2>
+        <button class="modal-close" (click)="cancelDelete()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="danger-box">
+          <p>You're about to remove</p>
+          <p class="danger-name">「 {{ deleteTargetTitle }} 」</p>
+          <p>from your vault. This action cannot be undone.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" (click)="cancelDelete()">Keep It</button>
+        <button class="btn-danger" (click)="deleteAnime()"><span>🗑</span> Remove Forever</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ═══════════════════ RATE MODAL ═══════════════════ -->
+@if (showRateModal) {
+  <div class="modal-backdrop" (click)="closeRateModal()">
+    <div class="modal modal-rate" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title"><span class="accent-bar"></span> Rate Anime</h2>
+        <button class="modal-close" (click)="closeRateModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="rate-anime-name">「 {{ rateTarget?.title }} 」</p>
+        <div class="rate-star-group">
+          <div class="star-picker star-picker-lg">
+            @for (s of starIndices; track s) {
+              <button type="button"
+                [class]="getStarClass(s, rateValue, rateHover)"
+                (mouseenter)="rateHover = s"
+                (mouseleave)="rateHover = 0"
+                (click)="rateValue = (rateValue === s ? 0 : s)"
+                [attr.aria-label]="'Rate ' + s + ' stars'">★</button>
+            }
+          </div>
+          <div class="rate-label-wrap">
+            <span class="rate-label-text">{{ getRatingLabel(rateHover || rateValue) }}</span>
+            @if (rateValue > 0) {
+              <span class="rate-clear" (click)="rateValue = 0">Clear</span>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" (click)="closeRateModal()">Cancel</button>
+        <button class="btn-primary" [disabled]="rateValue === 0" (click)="submitRating()">
+          <span>⭐</span> Save Rating
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-brand">⚡ AniVault</span>
+    <span class="footer-copy">Your anime, your universe.</span>
+  </div>
+</footer>
+
+<router-outlet />
